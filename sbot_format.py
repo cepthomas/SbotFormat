@@ -218,11 +218,14 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
                         n.nodeValue = n.nodeValue.strip()
                 elif n.nodeType == xml.dom.minidom.Node.ELEMENT_NODE:
                     clean(n)
-
-        top = xml.dom.minidom.parseString(s)
-        clean(top)
-        top.normalize()
-        ret = top.toprettyxml(indent='    ')
+        
+        try:
+            top = xml.dom.minidom.parseString(s)
+            clean(top)
+            top.normalize()
+            ret = top.toprettyxml(indent='    ')
+        except Exception as e:
+            ret = f"Error: {e}"
 
         return ret
 
