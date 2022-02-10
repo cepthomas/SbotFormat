@@ -1,11 +1,13 @@
 # What It Is
-Sublime Text plugin to do simple formatting of common source code files. Doesn't replace the file, shows in a new view.
+Sublime Text plugin to do simple formatting of common source code files. Doesn't replace the existing file,
+shows the content in a new view.
 
-- Prettify json, handles comments and trailing commas.
-- Prettify xmliew.
-- Prettify C family (C/C++/C#) files using AStyle (must be in your path).
+- Prettify json, turns C/C++ style comments into valid json elements, and removes trailing commas.
+- Prettify xml.
+- Prettify C family (C/C++/C#) files using AStyle (which must be installed and in your path).
+  Note: I started with the python astyle module but it's a sloppy install that offended my sensibilities. So this way.
 
-Built for Windows and ST4. Other OSes and ST versions will require some hacking.
+Built for ST4 on Windows and Linux.
 
 ## Commands
 | Command                  | Implementation | Description |

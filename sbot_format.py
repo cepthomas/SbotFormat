@@ -74,8 +74,6 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         # Index is in cleaned version, value is in original.
         pos_map = []
 
-        #{"sublime_text": "*", "dependencies": [], "version": "1.1.9", "url": "https://github.com/wadetb/Sublime-Text-Advanced-CSV", "description": "Efficiently format, edit, arrange, and evaluate cells in CSV files", "platforms": ["*"]}
-
         # Iterate the string.
         try:
             slen = len(s)
