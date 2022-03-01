@@ -242,7 +242,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         reg = _get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
 
-        # Build the command. TODO check for existence of astyle in path.
+        # Build the command.
         p = ['astyle', '-A1', '-s4', '-Y', '-X']
         if syntax == SYNTAX_CS:
             p.append('--mode=cs')
@@ -258,7 +258,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
             cp = subprocess.run(p, input=s, text=True, universal_newlines=True, capture_output=True, shell=True, check=True)
             sout = cp.stdout
         except Exception:
-            sout = "Format Cx failed. Is Astyle in your path?"
+            sout = "Format Cx failed. Is astyle installed and in your path?"
 
         vnew = _create_new_view(self.view.window(), sout)
         vnew.set_syntax_file(syntax)
