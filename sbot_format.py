@@ -18,18 +18,6 @@ SYNTAX_XML = 'Packages/XML/XML.sublime-syntax'
 
 
 #-----------------------------------------------------------------------------------
-def plugin_loaded():
-    # print(">>> SbotFormat plugin_loaded()")
-    pass
-
-
-#-----------------------------------------------------------------------------------
-def plugin_unloaded():
-    # print("SbotFormat plugin_unloaded()")
-    pass
-
-
-#-----------------------------------------------------------------------------------
 class SbotFormatJsonCommand(sublime_plugin.TextCommand):
     ''' sbot_format_json'''
 
