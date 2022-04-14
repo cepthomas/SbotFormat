@@ -8,6 +8,11 @@ import xml.dom.minidom
 import sublime
 import sublime_plugin
 
+try:
+    from SbotCommon.sbot_common import get_sel_regions, create_new_view
+except ModuleNotFoundError as e:
+    sublime.message_dialog('SbotFormat plugin requires SbotCommon plugin')
+
 
 # Syntax defs.
 SYNTAX_C = 'Packages/C++/C.sublime-syntax'
@@ -29,14 +34,15 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         sres = []
         err = False
 
-        reg = _get_sel_regions(self.view)[0]
+        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
         sres.append(s)
         if s.startswith('Error'):
             err = True
 
-        vnew = _create_new_view(self.view.window(), '\n'.join(sres))
+        vnew = create_new_view(self.view.window(), '\n'.join(sres))
         if not err:
             vnew.set_syntax_file(SYNTAX_JSON)
 
@@ -184,13 +190,14 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         err = False
 
-        reg = _get_sel_regions(self.view)[0]
+        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
         if s.startswith('Error'):
             err = True
 
-        vnew = _create_new_view(self.view.window(), s)
+        vnew = create_new_view(self.view.window(), s)
         if not err:
             vnew.set_syntax_file(SYNTAX_XML)
 
@@ -227,7 +234,8 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         syntax = self.view.settings().get('syntax')
 
-        reg = _get_sel_regions(self.view)[0]
+        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
 
         # Build the command.
@@ -248,27 +256,5 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         except Exception:
             sout = "Format Cx failed. Is astyle installed and in your path?"
 
-        vnew = _create_new_view(self.view.window(), sout)
+        vnew = create_new_view(self.view.window(), sout)
         vnew.set_syntax_file(syntax)
-
-
-#-----------------------------------------------------------------------------------
-def _get_sel_regions(view):
-    ''' Function to get selections or optionally the whole view.'''
-    regions = []
-    if len(view.sel()[0]) > 0:  # user sel
-        regions = view.sel()
-    else:
-        settings = sublime.load_settings("SbotFormat.sublime-settings")
-        if settings.get('sel_all'):
-            regions = [sublime.Region(0, view.size())]
-    return regions
-
-
-#-----------------------------------------------------------------------------------
-def _create_new_view(window, text):
-    ''' Creates a temp view with text. Returns the view.'''
-    vnew = window.new_file()
-    vnew.set_scratch(True)
-    vnew.run_command('append', {'characters': text})  # insert has some odd behavior - indentation
-    return vnew
