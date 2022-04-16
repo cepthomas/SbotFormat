@@ -11,7 +11,7 @@ import sublime_plugin
 try:
     from SbotCommon.sbot_common import get_sel_regions, create_new_view
 except ModuleNotFoundError as e:
-    sublime.message_dialog('SbotFormat plugin requires SbotCommon plugin')
+    raise ImportError('SbotFormat plugin requires SbotCommon plugin')
 
 
 # Syntax defs.
