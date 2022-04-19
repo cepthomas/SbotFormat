@@ -9,7 +9,7 @@ import sublime
 import sublime_plugin
 
 try:
-    from SbotCommon.sbot_common import get_sel_regions, create_new_view
+    from SbotCommon.sbot_common import get_sel_regions, create_new_view, log_message
 except ModuleNotFoundError as e:
     raise ImportError('SbotFormat plugin requires SbotCommon plugin')
 
