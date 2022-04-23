@@ -9,8 +9,8 @@ import sublime
 import sublime_plugin
 
 try:
-    from SbotCommon.sbot_common import get_sel_regions, create_new_view, log_message
-except ModuleNotFoundError as e:
+    from SbotCommon.sbot_common import get_sel_regions, create_new_view, slog
+except ModuleNotFoundError:
     raise ImportError('SbotFormat plugin requires SbotCommon plugin')
 
 
@@ -34,7 +34,7 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         sres = []
         err = False
 
-        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        settings = sublime.load_settings("SbotFormat.sublime-settings")
         reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
@@ -190,7 +190,7 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         err = False
 
-        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        settings = sublime.load_settings("SbotFormat.sublime-settings")
         reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
@@ -234,7 +234,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         syntax = self.view.settings().get('syntax')
 
-        settings = sublime.load_settings(f"SbotFormat.sublime-settings")
+        settings = sublime.load_settings("SbotFormat.sublime-settings")
         reg = get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
 
