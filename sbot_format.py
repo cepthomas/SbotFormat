@@ -9,7 +9,7 @@ import sublime
 import sublime_plugin
 
 try:
-    from SbotCommon.sbot_common import get_sel_regions, create_new_view, slog
+    import SbotCommon.sbot_common as sbot
 except ModuleNotFoundError:
     sublime.message_dialog('SbotFormat plugin requires SbotCommon plugin')
     raise ImportError('SbotFormat plugin requires SbotCommon plugin')
@@ -38,14 +38,14 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         err = False
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = get_sel_regions(self.view, settings)[0]
+        reg = sbot.get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
         sres.append(s)
         if s.startswith('Error'):
             err = True
 
-        vnew = create_new_view(self.view.window(), '\n'.join(sres))
+        vnew = sbot.create_new_view(self.view.window(), '\n'.join(sres))
         if not err:
             vnew.set_syntax_file(SYNTAX_JSON)
 
@@ -194,13 +194,13 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
         err = False
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = get_sel_regions(self.view, settings)[0]
+        reg = sbot.get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
         if s.startswith('Error'):
             err = True
 
-        vnew = create_new_view(self.view.window(), s)
+        vnew = sbot.create_new_view(self.view.window(), s)
         if not err:
             vnew.set_syntax_file(SYNTAX_XML)
 
@@ -238,7 +238,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         syntax = self.view.settings().get('syntax')
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = get_sel_regions(self.view, settings)[0]
+        reg = sbot.get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
 
         # Build the command.
@@ -259,5 +259,5 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         except Exception:
             sout = "Format Cx failed. Is astyle installed and in your path?"
 
-        vnew = create_new_view(self.view.window(), sout)
+        vnew = sbot.create_new_view(self.view.window(), sout)
         vnew.set_syntax_file(syntax)
