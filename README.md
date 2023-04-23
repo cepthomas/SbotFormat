@@ -22,6 +22,6 @@ Requires [SbotCommon](https://github.com/cepthomas/SbotCommon) plugin.
 
 ## Settings
 
-| Setting            | Description         | Options   |
-| :--------          | :-------            | :------   |
+| Setting            | Description         | Options                                                               |
+| :--------          | :-------            | :------                                                               |
 | `sel_all`          | Selection default   | if `true` and no user selection, assumes the whole document (like ST) |
