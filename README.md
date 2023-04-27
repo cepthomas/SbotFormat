@@ -10,8 +10,6 @@ shows the content in a new view.
 
 Built for ST4 on Windows and Linux.
 
-Requires [SbotCommon](https://github.com/cepthomas/SbotCommon) plugin.
-
 ## Commands
 
 | Command                  | Implementation | Description                   | Args        |
