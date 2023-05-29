@@ -15,9 +15,9 @@ Built for ST4 on Windows and Linux.
 
 | Command                  | Implementation | Description                   | Args        |
 | :--------                | :-------       | :-------                      | :--------   |
-| sbot_format_json        | Context         | Format json content           |             |
-| sbot_format_xml         | Context         | Format xml content            |             |
-| sbot_format_cx_src      | Context         | Format C/C++/C# content       |             |
+| sbot_format_json         | Context         | Format json content           |             |
+| sbot_format_xml          | Context         | Format xml content            |             |
+| sbot_format_cx_src       | Context         | Format C/C++/C# content       |             |
 
 ## Settings
 
