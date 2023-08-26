@@ -7,6 +7,7 @@
             { "caption": "Format C/C++/C#", "command": "sbot_format_cx_src" },
             { "caption": "Format json", "command": "sbot_format_json" },
             { "caption": "Format xml", "command": "sbot_format_xml" },
+            { "caption": "Format lua", "command": "sbot_format_lua" },
         ]
     },
 ]
