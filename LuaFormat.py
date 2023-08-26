@@ -1,5 +1,7 @@
 
-### Vars
+# ----------------------------------------------------------
+# Vars
+# ----------------------------------------------------------
 _start_node = None
 _end_node = None
 
@@ -7,8 +9,8 @@ _lines = []
 _setting = {}
 
 # These were in settings:
-special_symbol_split = True
-bracket_split = False
+_special_symbol_split = True
+_bracket_split = False
 
 
 # ----------------------------------------------------------
@@ -43,11 +45,16 @@ NodePattern = {
 }
 
 SingletonType = [
-    NodeType.BRACKET, NodeType.REVERSE_BRACKET, NodeType.STRING, NodeType.BLANK
+    NodeType.BRACKET,
+    NodeType.REVERSE_BRACKET,
+    NodeType.STRING,
+    NodeType.BLANK
 ]
 
 CommentType = [
-    NodeType.STRING, NodeType.COMMENT_SINGLE, NodeType.COMMENT_MULTI
+    NodeType.STRING,
+    NodeType.COMMENT_SINGLE,
+    NodeType.COMMENT_MULTI
 ]
 
 IndentKeyword = [
@@ -59,7 +66,10 @@ IndentKeyword = [
     'do',
 ]
 
-UnindentKeyword = ['end', 'until']
+UnindentKeyword = [
+    'end',
+    'until'
+]
 
 
 # ----------------------------------------------------------
@@ -76,7 +86,8 @@ class Line():
             r += str(node)
         enter_pos = r.find('\n')
         r = r[:enter_pos].strip(' ') + r[enter_pos:]
-        if r.strip(' ') == '\n': return '\n' #20
+        if r.strip(' ') == '\n':
+            return '\n' #20
         return ' ' * _settings.get('tab_size') * self._indent + r
 
     def is_blank_line(self):
@@ -149,7 +160,6 @@ class Node():
         def set_attr():
             def inner(self, value):
                 setattr(self, "_" + attr, value)
-
             return inner
 
         def get_attr():
@@ -158,7 +168,6 @@ class Node():
                     return getattr(self, "_" + attr)
                 except:
                     return None
-
             return inner
 
         return property(get_attr(), set_attr())
@@ -243,9 +252,11 @@ def delete_backward_blank(node):
 def get_forward_char(node, count):
     r = ''
     while True:
-        if not node: return r[::-1]
+        if not node:
+            return r[::-1]
         r += str(node)[::-1]
-        if len(r) >= count: return r[::-1][-count:]
+        if len(r) >= count:
+            return r[::-1][-count:]
         node = node.last
 
 
@@ -259,7 +270,8 @@ def get_forward_type(node):
 def get_forward_type_for_negative(node):
     while True:
         node = node.last
-        if node is None: return None
+        if node is None:
+            return None
         if node.type != NodeType.BLANK:
             return node.type
 
@@ -302,16 +314,15 @@ def foreach_node():
             char_key = str(node)
             while True:
                 node = node.next
-                if char_key == str(node) and get_forward_char(node,
-                                                              2)[0] != '\\':
+                if char_key == str(node) and get_forward_char(node, 2)[0] != '\\':
                     merge_prev_node(node)
                     break
                 if not node.next:
                     break
                 merge_prev_node(node)
+
         str_node = str(node)
-        if str_node == len(str_node) * '=' and str(node.last) == '[' and str(
-                node.next) == '[':
+        if str_node == len(str_node) * '=' and str(node.last) == '[' and str(node.next) == '[':
             end_flag = ']%s]' % (len(str_node) * '=')
 
             node = merge_prev_node(node)
@@ -337,6 +348,7 @@ def foreach_node():
                 merge_prev_node(node)
                 if not node.next:
                     break
+
         if get_forward_char(node, 2) == '--':
             # COMMENT_SINGLE
             # node = merge_prev_node(node)
@@ -384,24 +396,19 @@ def foreach_operator():
     for node in NodeIterator():
         if str(node) == '-':
             # scientific notation
-            # 科学计数法
-            if node.last and str(node.last)[-1].lower() == 'e' and str(
-                    node.last)[-2] in [str(x) for x in range(10)]:
+            if node.last and str(node.last)[-1].lower() == 'e' and str(node.last)[-2] in [str(x) for x in range(10)]:
                 continue
 
             # negative number
-            # 负号
             pntype = get_forward_type_for_negative(node)
-            if not pntype in [
-                    NodeType.WORD, NodeType.REVERSE_BRACKET, NodeType.STRING
-            ]:
+            if not pntype in [NodeType.WORD, NodeType.REVERSE_BRACKET, NodeType.STRING]:
                 delete_backward_blank(node)
                 continue
 
         if node.type == NodeType.OPERATOR:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if special_symbol_split:
+            if _special_symbol_split:
                 if node.last and node.last.type is not NodeType.BLANK:
                     insert_blank_node(node)
                 if node.next and node.next.type is not NodeType.BLANK:
@@ -413,7 +420,7 @@ def foreach_separator():
         if node.type == NodeType.SEPARATOR:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if special_symbol_split:
+            if _special_symbol_split:
                 if node.next and node.next.type is not NodeType.BLANK:
                     insert_blank_node(node.next)
 
@@ -424,11 +431,12 @@ def foreach_equal():
             if node.last and node.last.type is NodeType.EQUAL:
                 merge_prev_node(node)
 
+
     for node in NodeIterator():
         if node.type == NodeType.EQUAL:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if special_symbol_split:
+            if _special_symbol_split:
                 if node.last and node.last.type is not NodeType.BLANK:
                     insert_blank_node(node)
                 if node.next and node.next.type is not NodeType.BLANK:
@@ -439,13 +447,13 @@ def foreach_bracket():
     for node in NodeIterator():
         if node.type == NodeType.BRACKET:
             delete_backward_blank(node)
-            if bracket_split:
+            if _bracket_split:
                 if node.next and node.next.type != NodeType.BRACKET:
                     insert_blank_node(node.next)
 
         if node.type == NodeType.REVERSE_BRACKET:
             delete_forward_blank(node)
-            if bracket_split:
+            if _bracket_split:
                 if node.last and node.last.type != NodeType.REVERSE_BRACKET:
                     insert_blank_node(node)
             if node.last and node.last.last and node.last.type == NodeType.ENTER and node.last.last.type == NodeType.REVERSE_BRACKET:
@@ -491,12 +499,9 @@ def tidy_indent():
             bracket_key_dict[key] = bracket_key_dict.get(key, 0) + 1
 
         if node.type is NodeType.ENTER:
-            inc_indent(1 if line_key_dict.get('(', 0) > line_key_dict.get(
-                ')', 0) else 0)
-            inc_indent(1 if line_key_dict.get('{', 0) > line_key_dict.get(
-                '}', 0) else 0)
-            inc_indent(1 if line_key_dict.get('[', 0) > line_key_dict.get(
-                ']', 0) else 0)
+            inc_indent(1 if line_key_dict.get('(', 0) > line_key_dict.get(')', 0) else 0)
+            inc_indent(1 if line_key_dict.get('{', 0) > line_key_dict.get('}', 0) else 0)
+            inc_indent(1 if line_key_dict.get('[', 0) > line_key_dict.get(']', 0) else 0)
 
             if line_key_dict.get('(', 0) < line_key_dict.get(')', 0):
                 inc_indent(-1)
@@ -536,21 +541,17 @@ def tidy_indent():
 # ----------------------------------------------------------
 # Main
 # ----------------------------------------------------------
-def purge():
+def _lua_format(lines, settings):
+
     global _start_node
     global _end_node
     global _lines
     global _settings
+
+    _settings = settings
     _start_node = None
     _end_node = None
     _lines = []
-    _settings = {}
-
-
-def _lua_format(lines, setting=None):
-    purge()
-    global _settings
-    _settings = setting
 
     # deal content
     content = ''
@@ -584,6 +585,8 @@ def _lua_format(lines, setting=None):
 
 # return a string
 def lua_format(lines, settings):
+
+    # Do the work.
     _lua_format(lines, settings)
 
     r = ''
