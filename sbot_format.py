@@ -8,6 +8,7 @@ import xml.dom.minidom
 import sublime
 import sublime_plugin
 from . import sbot_common as sc
+from . import LuaFormat
 
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
@@ -262,8 +263,6 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
 
 
 #-----------------------------------------------------------------------------------
-import LuaFormat
-
 class SbotFormatLuaCommand(sublime_plugin.TextCommand):
     ''' sbot_format_lua '''
 
@@ -273,61 +272,16 @@ class SbotFormatLuaCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = sc.get_sel_regions(self.view, settings)[0]
-        s = self.view.substr(reg)
-
-        # "keys": ["ctrl+alt+f"], "command": "lua_format",
-        # sublime.run_command("lua_format")
-
-        # vnew = sc.create_new_view(self.view.window(), sout)
-        # vnew.set_syntax_file(syntax)
-
-
-
-        sout = lua_format(s, settings)
-        vnew = sc.create_new_view(self.view.window(), sout)
-        vnew.set_syntax_file(SYNTAX_LUA)
-
-        # # set tab_size from lua-format-setting
-        # self.view.run_command("set_setting", {"setting": "tab_size", "value": get_settings().get('tab_size', 4)})
-
-
-
-'''
-class LuaFormatCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-        # check whether the lua files
-        suffix_setting = self.view.settings().get('syntax')
-        file_suffix = suffix_setting.split('.')[0]
-        if file_suffix[-3:].lower() != 'lua': return
-
-        # get lines of replacement
-        r = sublime.Region(0, self.view.size())
+        r = sc.get_sel_regions(self.view, settings)[0]
         self.view.unfold(r)
-        
-        # get characters of view
+
+        # Get lines of view.
         lines = []
         for region in self.view.lines(r):
             cache = self.view.substr(region)
             if len(cache) == 0: cache = ' '
             lines.append(cache)
 
-        # get cursor position before the replacement
-        selection = self.view.sel()[0].b
-        row, col = self.view.rowcol(selection)
-
-        # replace the content after format
-        print("Run Lua Format")
-        self.view.replace(edit, r, lua_format(lines, get_settings()))
-
-        # set tab_size from lua-format-setting
-        self.view.run_command("set_setting", {"setting": "tab_size", "value": get_settings().get('tab_size', 4)})
-
-        # deal cursor position
-        selection = self.view.full_line(self.view.text_point(row - 1, 0)).b
-        cursor_pos = sublime.Region(selection, selection)
-        regions = self.view.sel()
-        regions.clear()
-        regions.add(cursor_pos)
-        sublime.set_timeout_async(lambda: self.view.show(cursor_pos), 0)
-'''
+        sout = LuaFormat.lua_format(lines, settings)
+        vnew = sc.create_new_view(self.view.window(), sout)
+        vnew.set_syntax_file(SYNTAX_LUA)

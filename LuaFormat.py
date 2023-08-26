@@ -1,30 +1,14 @@
 
+### Vars
 _start_node = None
 _end_node = None
 
 _lines = []
 _setting = {}
 
-# TODO These old settings:
+# These were in settings:
 special_symbol_split = True
 bracket_split = False
-
-# split special symbol with a spaces
-# , + - * / ^ % 
-# Ex:
-#     local a,b=function(c,d) return c+d,c-d end 
-# --> local a, b = function(c, d) return c + d, c - d end
-# "special_symbol_split": true,
-#
-# split bracket with a spaces
-# Ex:
-#     foo(a,b,c) 
-# --> foo( a,b,c )
-# "bracket_split": false,
-#
-# run `Lua Format` automatically when saved file
-# "auto_format_on_save": false
-
 
 
 # ----------------------------------------------------------
@@ -417,7 +401,7 @@ def foreach_operator():
         if node.type == NodeType.OPERATOR:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if _settings.get('special_symbol_split'):
+            if special_symbol_split:
                 if node.last and node.last.type is not NodeType.BLANK:
                     insert_blank_node(node)
                 if node.next and node.next.type is not NodeType.BLANK:
@@ -429,7 +413,7 @@ def foreach_separator():
         if node.type == NodeType.SEPARATOR:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if _settings.get('special_symbol_split'):
+            if special_symbol_split:
                 if node.next and node.next.type is not NodeType.BLANK:
                     insert_blank_node(node.next)
 
@@ -444,7 +428,7 @@ def foreach_equal():
         if node.type == NodeType.EQUAL:
             delete_forward_blank(node)
             delete_backward_blank(node)
-            if _settings.get('special_symbol_split'):
+            if special_symbol_split:
                 if node.last and node.last.type is not NodeType.BLANK:
                     insert_blank_node(node)
                 if node.next and node.next.type is not NodeType.BLANK:
@@ -455,13 +439,13 @@ def foreach_bracket():
     for node in NodeIterator():
         if node.type == NodeType.BRACKET:
             delete_backward_blank(node)
-            if _settings.get('bracket_split'):
+            if bracket_split:
                 if node.next and node.next.type != NodeType.BRACKET:
                     insert_blank_node(node.next)
 
         if node.type == NodeType.REVERSE_BRACKET:
             delete_forward_blank(node)
-            if _settings.get('bracket_split'):
+            if bracket_split:
                 if node.last and node.last.type != NodeType.REVERSE_BRACKET:
                     insert_blank_node(node)
             if node.last and node.last.last and node.last.type == NodeType.ENTER and node.last.last.type == NodeType.REVERSE_BRACKET:
