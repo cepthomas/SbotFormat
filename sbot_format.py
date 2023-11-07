@@ -8,7 +8,7 @@ import xml.dom.minidom
 import sublime
 import sublime_plugin
 from . import sbot_common as sc
-from . import LuaFormat # TODO doesn't work well.
+from . import LuaFormat
 
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"

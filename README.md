@@ -8,7 +8,7 @@ Built for ST4 on Windows and Linux.
 - Prettify json, turns C/C++ style comments into valid json elements, and removes trailing commas.
 - Prettify xml.
 - Prettify C family (C/C++/C#) files using [AStyle](https://astyle.sourceforge.net/) (which must be installed and in your path). Note: I started with the python astyle module but didn't care for it.
-- Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license).
+- Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
 
 
 
