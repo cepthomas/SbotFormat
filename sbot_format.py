@@ -7,8 +7,8 @@ import xml
 import xml.dom.minidom
 import sublime
 import sublime_plugin
-from . import sbot_common as sc
 from . import LuaFormat
+from . import sbot_common as sc
 
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
@@ -239,18 +239,11 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         reg = sc.get_sel_regions(self.view, settings)[0]
         s = self.view.substr(reg)
 
-        # Build the command.
+        # Build the command. Uses --style=allman --indent=spaces=4 --indent-col1-comments --errors-to-stdout
         sindent = f"-s{settings.get('tab_size')}"
         p = ['astyle', '-A1', sindent, '-Y', '-X']
-        if syntax == SYNTAX_CS:
+        if syntax == SYNTAX_CS: # else default of C
             p.append('--mode=cs')
-        # type tin.c | astyle -A1 -s4 -Y -X > tout.c
-        # --style=allman -A1
-        # --indent=spaces=4  -s4
-        # --indent-col1-comments -Y
-        # --verbose -v
-        # --errors-to-stdout -X
-        # --mode=c or --mode=cs
 
         try:
             cp = subprocess.run(p, input=s, text=True, universal_newlines=True, capture_output=True, shell=True, check=True)
