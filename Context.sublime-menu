@@ -1,7 +1,6 @@
 [
     { "caption": "-" },
-    {
-        "caption": "Format",
+    { "caption": "Format",
         "children":
         [
             { "caption": "Format C/C++/C#", "command": "sbot_format_cx_src" },
