@@ -25,5 +25,4 @@ Built for ST4 on Windows and Linux.
 
 | Setting            | Description         | Options                                                               |
 | :--------          | :-------            | :------                                                               |
-| sel_all            | Selection default   | if true and no user selection, assumes the whole document (like ST)   |
 | tab_size           | Spaces per tab      | Currently applies to all file types                                   |

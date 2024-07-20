@@ -5,11 +5,14 @@ import enum
 import json
 import xml
 import xml.dom.minidom
+import logging
 import sublime
 import sublime_plugin
 from . import LuaFormat
 from . import sbot_common as sc
 
+_logger = logging.getLogger(__name__)
+_logger.setLevel(logging.DEBUG)
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 
@@ -34,8 +37,7 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         sres = []
         err = False
 
-        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = sc.get_sel_regions(self.view, settings)[0]
+        reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
         s = self._do_one(s)
         sres.append(s)
@@ -191,7 +193,7 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
         err = False
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = sc.get_sel_regions(self.view, settings)[0]
+        reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
         s = self._do_one(s, ' ' * settings.get('tab_size'))
         if s.startswith('Error'):
@@ -236,7 +238,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         syntax = self.view.settings().get('syntax')
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        reg = sc.get_sel_regions(self.view, settings)[0]
+        reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
 
         # Build the command. Uses --style=allman --indent=spaces=4 --indent-col1-comments --errors-to-stdout
@@ -265,7 +267,7 @@ class SbotFormatLuaCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        r = sc.get_sel_regions(self.view, settings)[0]
+        r = sc.get_sel_regions(self.view)[0]
         self.view.unfold(r)
 
         # Get lines of view.
