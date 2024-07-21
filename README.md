@@ -1,4 +1,4 @@
-# What It Is
+# Sbot Format
 
 Sublime Text plugin to do simple formatting of common source code files. Doesn't replace the existing file,
 shows the content in a new view.
@@ -9,7 +9,6 @@ Built for ST4 on Windows and Linux.
 - Prettify xml.
 - Prettify C family (C/C++/C#) files using [AStyle](https://astyle.sourceforge.net/) (which must be installed and in your path). Note: I started with the python astyle module but didn't care for it.
 - Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
-
 
 
 ## Commands
@@ -23,8 +22,7 @@ Built for ST4 on Windows and Linux.
 
 ## Settings
 
-| Setting            | Description         | Options                                                               |
-| :--------          | :-------            | :------                                                               |
-| tab_size           | Spaces per tab      | Currently applies to all file types                                   |
-    // Log level: "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"
-    "log_level": "DEBUG",
+| Setting            | Description         | Options                                     |
+| :--------          | :-------            | :------                                     |
+| tab_size           | Spaces per tab      | Currently applies to all file types         |
+| log_level          | Min level to log    | CRITICAL ERROR WARNING INFO DEBUG           |
