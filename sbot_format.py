@@ -12,7 +12,6 @@ from . import LuaFormat
 from . import sbot_common as sc
 
 _logger = logging.getLogger(__name__)
-_logger.setLevel(logging.DEBUG)
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 
@@ -23,6 +22,17 @@ SYNTAX_CS = 'Packages/C#/C#.sublime-syntax'
 SYNTAX_JSON = 'Packages/JSON/JSON.sublime-syntax'
 SYNTAX_XML = 'Packages/XML/XML.sublime-syntax'
 SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
+
+
+#-----------------------------------------------------------------------------------
+class FormatEvent(sublime_plugin.EventListener):
+    ''' Process view events. '''
+
+    def on_init(self, views):
+        ''' First thing that happens when plugin/window created. Initialize everything. '''
+        global _logger
+        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
+        _logger.setLevel(settings.get('log_level'))
 
 
 #-----------------------------------------------------------------------------------

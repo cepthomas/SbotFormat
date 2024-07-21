@@ -1,4 +1,7 @@
 {
     // Number of spaces for a tab.
     "tab_size": 4,
+
+    // Log level: "CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"
+    "log_level": "DEBUG",
 }
