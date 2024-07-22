@@ -11,6 +11,8 @@ import sublime_plugin
 from . import LuaFormat
 from . import sbot_common as sc
 
+# TODO do more testing.
+
 _logger = logging.getLogger(__name__)
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
@@ -177,6 +179,7 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
             # Run it through the formatter.
             ret = json.loads(ret)
             ret = json.dumps(ret, indent=4)
+
         except json.JSONDecodeError as je:
             # Get some context from the original string.
             context = []
