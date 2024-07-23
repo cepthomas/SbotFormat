@@ -5,15 +5,12 @@ import enum
 import json
 import xml
 import xml.dom.minidom
-import logging
 import sublime
 import sublime_plugin
 from . import LuaFormat
 from . import sbot_common as sc
 
 # TODO do more testing.
-
-_logger = logging.getLogger(__name__)
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 
@@ -29,18 +26,13 @@ SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
 #-----------------------------------------------------------------------------------
 def plugin_loaded():
     ''' Called once per plugin instance. '''
-
-    # Set up logging.
-    _logger = sc.init_log(__package__)
-    print(f'>>> plugin_loaded() {__package__} {id(_logger)}')
+    print(f'>>> plugin_loaded() {__package__}')
 
 
 #-----------------------------------------------------------------------------------
 def plugin_unloaded():
     ''' Called once per plugin instance. '''
-
-    # Clean up logging.
-    sc.deinit_log(_logger)
+    print(f'>>> plugin_unloaded() {__package__}')
 
 
 #-----------------------------------------------------------------------------------
@@ -49,9 +41,8 @@ class FormatEvent(sublime_plugin.EventListener):
 
     def on_init(self, views):
         ''' First thing that happens when plugin/window created. Initialize everything. '''
-
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        _logger.setLevel(settings.get('log_level'))
+        sc.set_log_level(settings.get('log_level'))
 
 
 #-----------------------------------------------------------------------------------
