@@ -25,4 +25,3 @@ Built for ST4 on Windows and Linux.
 | Setting            | Description         | Options                                     |
 | :--------          | :-------            | :------                                     |
 | tab_size           | Spaces per tab      | Currently applies to all file types         |
-| log_level          | Min level to log    | ERR WRN INF DBG TRC                         |

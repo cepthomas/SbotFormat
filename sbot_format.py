@@ -41,7 +41,6 @@ class FormatEvent(sublime_plugin.EventListener):
     def on_init(self, views):
         ''' First thing that happens when plugin/window created. Initialize everything. '''
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
-        sc.set_log_level(settings.get('log_level'))
 
 
 #-----------------------------------------------------------------------------------

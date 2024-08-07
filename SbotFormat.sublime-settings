@@ -1,7 +1,4 @@
 {
     // Number of spaces for a tab.
     "tab_size": 4,
-
-    // Min level to log - ERR WRN INF DBG TRC
-    "log_level": "INF",
 }
