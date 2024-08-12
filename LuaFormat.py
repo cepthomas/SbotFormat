@@ -566,7 +566,7 @@ def _lua_format(lines, settings):
     parse_node(content)
     foreach_node()
     # for node in NodeIterator():
-    #     print(str(node), node.ty8e)
+    #     pr_int(str(node), node.ty8e)
     # return ""
     # exit()
 
