@@ -8,12 +8,12 @@ import xml.dom.minidom
 import sublime
 import sublime_plugin
 from . import LuaFormat
-from .SbotCommon import utils as sc
-from .SbotCommon.logger import *
+from .SbotCommon import common as sc
+from .SbotCommon import logger as log
 from .SbotCommon.tracer import *
 
  # Initialize logging.
-log_init(sc.get_store_fn('sbot.log'))
+log.init(sc.get_store_fn('sbot.log'))
 
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
@@ -30,7 +30,7 @@ SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
 #-----------------------------------------------------------------------------------
 def plugin_loaded():
     '''Called per plugin instance.'''
-    log_info(f'Loading {__package__} with python {platform.python_version()} on {platform.platform()}')
+    log.info(f'plugin_loaded() {__package__}')
 
 
 #-----------------------------------------------------------------------------------
