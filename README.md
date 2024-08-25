@@ -1,4 +1,4 @@
-# Sbot Format
+# SbotFormat
 
 Sublime Text plugin to do simple formatting of common source code files. Doesn't replace the existing file,
 shows the content in a new view.
@@ -13,12 +13,28 @@ Built for ST4 on Windows and Linux.
 
 ## Commands
 
-| Command                  | Type     | Description                   | Args             |
-| :--------                | :------- | :-------                      | :--------        |
-| sbot_format_json         | Context  | Format json content           |                  |
-| sbot_format_xml          | Context  | Format xml content            |                  |
-| sbot_format_cx_src       | Context  | Format C/C++/C# content       |                  |
-| sbot_format_lua          | Context  | Format lua content            |                  |
+| Command                  | Description                   | Args             |
+| :--------                | :-------                      | :--------        |
+| sbot_format_json         | Format json content           |                  |
+| sbot_format_xml          | Format xml content            |                  |
+| sbot_format_cx_src       | Format C/C++/C# content       |                  |
+| sbot_format_lua          | Format lua content            |                  |
+
+
+There is no default `Context.sublime-menu` file in this plugin.
+Add the commands you like to your own `User\Context.sublime-menu` file. Typical entries are:
+``` json
+{ "caption": "Format",
+    "children":
+    [
+        { "caption": "Format C/C++/C#", "command": "sbot_format_cx_src" },
+        { "caption": "Format json", "command": "sbot_format_json" },
+        { "caption": "Format xml", "command": "sbot_format_xml" },
+        { "caption": "Format lua", "command": "sbot_format_lua" },
+    ]
+}
+
+```
 
 ## Settings
 
