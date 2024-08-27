@@ -33,7 +33,6 @@ Add the commands you like to your own `User\Context.sublime-menu` file. Typical 
         { "caption": "Format lua", "command": "sbot_format_lua" },
     ]
 }
-
 ```
 
 ## Settings
