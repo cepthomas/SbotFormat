@@ -10,6 +10,7 @@ import sublime_plugin
 from . import LuaFormat
 from . import sbot_common as sc
 
+# TODO Needs debugging.
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 

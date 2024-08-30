@@ -11,7 +11,7 @@ Built for ST4 on Windows and Linux.
 - Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
 
 
-## Commands
+## Commands and Menus
 
 | Command                  | Description                   | Args             |
 | :--------                | :-------                      | :--------        |
