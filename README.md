@@ -3,13 +3,14 @@
 Sublime Text plugin to do simple formatting of common source code files. Doesn't replace the existing file,
 shows the content in a new view.
 
-Built for ST4 on Windows and Linux.
-
 - Prettify json, turns C/C++ style comments into valid json elements, and removes trailing commas.
 - Prettify xml.
 - Prettify C family (C/C++/C#) files using [AStyle](https://astyle.sourceforge.net/) (which must be installed and in your path). Note: I started with the python astyle module but didn't care for it.
 - Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
 
+Built for ST4 on Windows and Linux (lightly tested).
+
+Log file is in $APPDATA\Sublime Text\Packages\User\.SbotStore\sbot.log.
 
 ## Commands and Menus
 
