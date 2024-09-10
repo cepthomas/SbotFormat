@@ -10,7 +10,6 @@ shows the content in a new view.
 
 Built for ST4 on Windows and Linux (lightly tested).
 
-Log file is in $APPDATA\Sublime Text\Packages\User\.SbotStore\sbot.log.
 
 ## Commands and Menus
 
@@ -41,3 +40,9 @@ Add the commands you like to your own `User\Context.sublime-menu` file. Typical 
 | Setting            | Description         | Options                                     |
 | :--------          | :-------            | :------                                     |
 | tab_size           | Spaces per tab      | Currently applies to all file types         |
+
+## Notes
+
+- `sbot_common.py` contains miscellaneous common components primarily for internal use by the sbot family.
+  This includes a very simple logger primarily for user-facing information, syntax errors and the like.
+  Log file is in $APPDATA\Sublime Text\Packages\User\.SbotStore\sbot.log.
