@@ -41,7 +41,7 @@ class FormatEvent(sublime_plugin.EventListener):
 
     def on_init(self, views):
         ''' First thing that happens when plugin/window created. Initialize everything. '''
-        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
+        del views
 
 
 #-----------------------------------------------------------------------------------
@@ -53,6 +53,7 @@ class SbotFormatJsonCommand(sublime_plugin.TextCommand):
         return True
 
     def run(self, edit):
+        del edit
         sres = []
         err = False
 
@@ -210,12 +211,13 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
         return self.view.settings().get('syntax') == SYNTAX_XML
 
     def run(self, edit):
+        del edit
         err = False
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
         reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
-        s = self._do_one(s, ' ' * settings.get('tab_size'))
+        s = self._do_one(s, ' ' * int(str(settings.get('tab_size'))))
         if s.startswith('Error'):
             err = True
 
@@ -254,8 +256,9 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         return syntax in [SYNTAX_C, SYNTAX_CPP, SYNTAX_CS]
 
     def run(self, edit):
+        del edit
         # Current syntax.
-        syntax = self.view.settings().get('syntax')
+        syntax = str(self.view.settings().get('syntax'))
 
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
         reg = sc.get_sel_regions(self.view)[0]
@@ -286,6 +289,7 @@ class SbotFormatLuaCommand(sublime_plugin.TextCommand):
         return syntax == SYNTAX_LUA #and have_luafmt is True
 
     def run(self, edit):
+        del edit
         settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
         r = sc.get_sel_regions(self.view)[0]
         self.view.unfold(r)
