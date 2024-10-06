@@ -3,20 +3,11 @@ import os
 import unittest
 from unittest.mock import MagicMock
 
-# Add path to code under test.
-cut_path = os.path.join(os.path.dirname(__file__), '..')
-if cut_path not in sys.path:
-      sys.path.insert(0, cut_path)
+# Set up the sublime emulation environment.
+import emu_sublime_api as emu
 
-# Now import the sublime emulation.
-import emu_sublime
-import emu_sublime_plugin
-sys.modules["sublime"] = emu_sublime
-sys.modules["sublime_plugin"] = emu_sublime_plugin
-
-# Now import the code under test.
+# Import the code under test.
 import sbot_format
-
 import sbot_common as sc
 
 
@@ -27,15 +18,15 @@ class TestFormat(unittest.TestCase):
         mock_settings = {
             "tab_size": 4,
         }
-        sublime.load_settings = MagicMock(return_value=mock_settings)
+        emu.load_settings = MagicMock(return_value=mock_settings)
 
     def tearDown(self):
         pass
 
     def test_format_json(self):
-        v = sublime.View(601)
+        v = emu.View(601)
 
-        with open(r'SbotDev\test_files\messy.json', 'r') as fp:
+        with open(r'TODO\test_files\messy.json', 'r') as fp:
             # The happy path.
             s = fp.read()
             cmd = sbot_format.SbotFormatJsonCommand(v)
@@ -48,9 +39,9 @@ class TestFormat(unittest.TestCase):
             self.assertEqual(res[:50], "Json Error: Expecting property name enclosed in do")
 
     def test_format_xml(self):
-        v = sublime.View(602)
+        v = emu.View(602)
 
-        with open(r'SbotDev\test_files\messy.xml', 'r') as fp:
+        with open(r'TODO\test_files\messy.xml', 'r') as fp:
             # The happy path.
             s = fp.read()
             cmd = sbot_format.SbotFormatXmlCommand(v)
