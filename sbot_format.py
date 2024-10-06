@@ -7,10 +7,16 @@ import xml
 import xml.dom.minidom
 import sublime
 import sublime_plugin
-from . import LuaFormat
-from . import sbot_common as sc
 
-# TODO Needs debugging.
+# Kludge to make testing work. TODO1 hid this kind of stuff?
+try:
+    import sbot_common as sc
+    import LuaFormat
+except:
+    from . import sbot_common as sc
+    from . import LuaFormat
+
+# TODOT Some formatters need debugging.
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 

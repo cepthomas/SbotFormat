@@ -12,9 +12,11 @@ import sbot_common as sc
 
 
 #-----------------------------------------------------------------------------------
-class TestFormat(unittest.TestCase):
+class TestFormat(unittest.TestCase):  # TODOT more tests
 
     def setUp(self):
+        self.my_dir = os.path.dirname(__file__)
+
         mock_settings = {
             "tab_size": 4,
         }
@@ -26,7 +28,8 @@ class TestFormat(unittest.TestCase):
     def test_format_json(self):
         v = emu.View(601)
 
-        with open(r'TODO\test_files\messy.json', 'r') as fp:
+        fn = os.path.join(self.my_dir, 'messy.json')
+        with open(f'{fn}', 'r') as fp:
             # The happy path.
             s = fp.read()
             cmd = sbot_format.SbotFormatJsonCommand(v)
@@ -41,7 +44,8 @@ class TestFormat(unittest.TestCase):
     def test_format_xml(self):
         v = emu.View(602)
 
-        with open(r'TODO\test_files\messy.xml', 'r') as fp:
+        fn = os.path.join(self.my_dir, 'messy.xml')
+        with open(f'{fn}', 'r') as fp:
             # The happy path.
             s = fp.read()
             cmd = sbot_format.SbotFormatXmlCommand(v)
