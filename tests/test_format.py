@@ -3,6 +3,7 @@ import os
 import unittest
 from unittest.mock import MagicMock
 
+
 # Set up the sublime emulation environment.
 import emu_sublime_api as emu
 
@@ -20,7 +21,7 @@ class TestFormat(unittest.TestCase):  # TODOT more tests
         mock_settings = {
             "tab_size": 4,
         }
-        emu.load_settings = MagicMock(return_value=mock_settings)
+        emu._settings = mock_settings
 
     def tearDown(self):
         pass
