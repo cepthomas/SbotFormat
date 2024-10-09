@@ -8,7 +8,7 @@ import xml.dom.minidom
 import sublime
 import sublime_plugin
 
-# Kludge to make testing work. TODO1 hid this kind of stuff?
+# Kludge to make testing work. TODO1 hide this kind of stuff?
 try:
     import sbot_common as sc
     import LuaFormat
@@ -16,7 +16,7 @@ except:
     from . import sbot_common as sc
     from . import LuaFormat
 
-# TODOT Some formatters need debugging.
+# TODO2 Some formatters need debugging.
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
 
