@@ -1,8 +1,7 @@
 import sys
 import os
 import unittest
-# from unittest.mock import MagicMock
-
+from unittest.mock import MagicMock
 
 # Set up the sublime emulation environment.
 import emu_sublime_api as emu
@@ -21,11 +20,12 @@ class TestFormat(unittest.TestCase):  # TODOT more tests
         mock_settings = {
             "tab_size": 4,
         }
-        emu._settings = mock_settings
+        emu.set_settings(mock_settings)
 
     def tearDown(self):
         pass
 
+    #------------------------------------------------------------
     def test_format_json(self):
         v = emu.View(601)
 
@@ -42,6 +42,7 @@ class TestFormat(unittest.TestCase):  # TODOT more tests
             res = cmd._do_one(s)
             self.assertEqual(res[:50], "Json Error: Expecting property name enclosed in do")
 
+    #------------------------------------------------------------
     def test_format_xml(self):
         v = emu.View(602)
 

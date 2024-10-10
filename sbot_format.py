@@ -7,14 +7,12 @@ import xml
 import xml.dom.minidom
 import sublime
 import sublime_plugin
-
-# Kludge to make testing work. TODO1 hide this kind of stuff?
 try:
-    import sbot_common as sc
-    import LuaFormat
-except:
-    from . import sbot_common as sc
+    from . import sbot_common as sc  # normal import
     from . import LuaFormat
+except:
+    import sbot_common as sc  # unittest import
+    import LuaFormat
 
 # TODO2 Some formatters need debugging.
 
