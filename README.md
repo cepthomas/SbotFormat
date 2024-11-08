@@ -8,7 +8,7 @@ shows the content in a new view.
 - Prettify C family (C/C++/C#) files using [AStyle](https://astyle.sourceforge.net/) (which must be installed and in your path). Note: I started with the python astyle module but didn't care for it.
 - Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
 
-Built for ST4 on Windows and Linux (lightly tested).
+Built for ST4 on Windows. Linux and OSX should be ok but are minimally tested - PRs welcome.
 
 
 ## Commands and Menus
@@ -45,4 +45,4 @@ Add the commands you like to your own `User\Context.sublime-menu` file. Typical 
 
 - `sbot_common.py` contains miscellaneous common components primarily for internal use by the sbot family.
   This includes a very simple logger primarily for user-facing information, syntax errors and the like.
-  Log file is in $APPDATA\Sublime Text\Packages\User\.SbotStore\sbot.log.
+  Log file is in $APPDATA\Sublime Text\Packages\User\Dev\sbot.log.
