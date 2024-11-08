@@ -14,6 +14,7 @@ except:
     import sbot_common as sc  # unittest import
     import LuaFormat
 
+
 # TODO2 Some formatters need debugging.
 
 FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
@@ -30,6 +31,7 @@ SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
 #-----------------------------------------------------------------------------------
 def plugin_loaded():
     '''Called per plugin instance.'''
+    sc.init('Dev')
     sc.debug(f'plugin_loaded() {__package__}')
 
 
