@@ -17,8 +17,6 @@ except:
 
 # TODO2 Some formatters need debugging.
 
-FORMAT_SETTINGS_FILE = "SbotFormat.sublime-settings"
-
 # Syntax defs.
 SYNTAX_C = 'Packages/C++/C.sublime-syntax'
 SYNTAX_CPP = 'Packages/C++/C++.sublime-syntax'
@@ -31,7 +29,6 @@ SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
 #-----------------------------------------------------------------------------------
 def plugin_loaded():
     '''Called per plugin instance.'''
-    sc.init('Dev')
     sc.debug(f'plugin_loaded() {__package__}')
 
 
@@ -220,7 +217,7 @@ class SbotFormatXmlCommand(sublime_plugin.TextCommand):
         del edit
         err = False
 
-        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
+        settings = sublime.load_settings(sc.get_settings_fn())
         reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
         s = self._do_one(s, ' ' * int(str(settings.get('tab_size'))))
@@ -266,7 +263,7 @@ class SbotFormatCxSrcCommand(sublime_plugin.TextCommand):
         # Current syntax.
         syntax = str(self.view.settings().get('syntax'))
 
-        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
+        settings = sublime.load_settings(sc.get_settings_fn())
         reg = sc.get_sel_regions(self.view)[0]
         s = self.view.substr(reg)
 
@@ -296,7 +293,7 @@ class SbotFormatLuaCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
         del edit
-        settings = sublime.load_settings(FORMAT_SETTINGS_FILE)
+        settings = sublime.load_settings(sc.get_settings_fn())
         r = sc.get_sel_regions(self.view)[0]
         self.view.unfold(r)
 

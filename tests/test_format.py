@@ -8,14 +8,13 @@ import emu_sublime_api as emu
 
 # Import the code under test.
 import sbot_format
-import sbot_common as sc
+# import sbot_common as sc
 
 
 #-----------------------------------------------------------------------------------
 class TestFormat(unittest.TestCase):  # TODOT more tests
 
     def setUp(self):
-        # sc.init('_Test')
         
         self.my_dir = os.path.dirname(__file__)
 
