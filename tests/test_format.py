@@ -15,7 +15,7 @@ import sbot_common as sc
 class TestFormat(unittest.TestCase):  # TODOT more tests
 
     def setUp(self):
-        sc.init('_Test')
+        # sc.init('_Test')
         
         self.my_dir = os.path.dirname(__file__)
 
