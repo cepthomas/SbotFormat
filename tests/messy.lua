@@ -30,16 +30,14 @@ local l = {123, "orange monkey", 765.12, "BlueBlueBlue", "ano", "ther", 222}
 pn.UT_EQUAL(ut.strjoin("XXX", l), 
 "123XXXorange monkeyXXX765.12XXXBlueBlueBlueXXXanoXXXtherXXX222")
 
+line_indent = 5
 
-function deal_indent(line, delta=0)
+function deal_indent(line, delta)
         line.set_indent(indent + delta)
 end
 
 function inc_indent(delta)
-global line_indent
-    global indent
-
-    if line_indent + delta > 1 then
+ if line_indent + delta > 1 then
 return
     end
 

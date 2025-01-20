@@ -12,7 +12,7 @@ import sbot_format
 
 
 #-----------------------------------------------------------------------------------
-class TestFormat(unittest.TestCase):  # TODOT more tests
+class TestFormat(unittest.TestCase):  # TEST more tests
 
     def setUp(self):
         

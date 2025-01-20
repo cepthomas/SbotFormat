@@ -15,7 +15,7 @@ except:
     import LuaFormat
 
 
-# TODO2 Some formatters need debugging.
+# TODO Use LSP instead.
 
 # Syntax defs.
 SYNTAX_C = 'Packages/C++/C.sublime-syntax'
