@@ -29,7 +29,7 @@ SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
 #-----------------------------------------------------------------------------------
 def plugin_loaded():
     '''Called per plugin instance.'''
-    sc.debug(f'plugin_loaded() {__package__}')
+    pass
 
 
 #-----------------------------------------------------------------------------------
