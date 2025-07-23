@@ -45,4 +45,4 @@ Add the commands you like to your own `User\Context.sublime-menu` file. Typical 
 
 - `sbot_common.py` contains miscellaneous common components primarily for internal use by the sbot family.
   This includes a very simple logger primarily for user-facing information, syntax errors and the like.
-  Log file is in $APPDATA\Sublime Text\Packages\User\SbotFormat\SbotFormat.log.
+  Log file is in `<ST_PACKAGES_DIR>\User\SbotFormat\SbotFormat.log`.
