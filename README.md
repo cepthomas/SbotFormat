@@ -8,6 +8,8 @@ shows the content in a new view.
 - Prettify C family (C/C++/C#) files using [AStyle](https://astyle.sourceforge.net/) (which must be installed and in your path). Note: I started with the python astyle module but didn't care for it.
 - Prettify lua - uses main code from [LuaFormat](https://github.com/floydawong/LuaFormat) (MIT license). Gets a bit confused sometimes.
 
+**NOTE:** LSP works much better for json and lua and should be preferred. Keeping this code here for now.
+
 Built for ST4 on Windows. Linux and OSX should be ok but are minimally tested - PRs welcome.
 
 

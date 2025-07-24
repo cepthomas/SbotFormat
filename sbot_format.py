@@ -15,15 +15,15 @@ except:
     import LuaFormat
 
 
-# TODO Use LSP instead.
-
 # Syntax defs.
 SYNTAX_C = 'Packages/C++/C.sublime-syntax'
 SYNTAX_CPP = 'Packages/C++/C++.sublime-syntax'
 SYNTAX_CS = 'Packages/C#/C#.sublime-syntax'
-SYNTAX_JSON = 'Packages/JSON/JSON.sublime-syntax'
 SYNTAX_XML = 'Packages/XML/XML.sublime-syntax'
+# Prefer LSP for Lua:
 SYNTAX_LUA = 'Packages/Lua/Lua.sublime-syntax'
+# Prefer LSP for json/jsonc:
+SYNTAX_JSON = 'Packages/JSON/JSON.sublime-syntax'
 
 
 #-----------------------------------------------------------------------------------
